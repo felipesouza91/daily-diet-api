@@ -40,5 +40,5 @@ Desafio proposto como para fixição do aprendizado do desenvolvimento de uma AP
 
 ## Autores
 
-- [@felipesouza91](https://www.github.com/octokatherine)
+- [@felipesouza91](https://www.github.com/felipesouza91)
 
