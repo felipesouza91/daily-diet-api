@@ -1,6 +1,7 @@
 # Daily Diet API
 
 Desafio proposto como para fixição do aprendizado do desenvolvimento de uma API REST em nodeJs. API utilizada parar gerenciar o consumo de alimentos.
+
 ## Funcionalidades
 
 [-] Deve ser possível criar um usuário
@@ -14,6 +15,7 @@ Desafio proposto como para fixição do aprendizado do desenvolvimento de uma AP
     [-] Descrição
     [-] Data e Hora
     [-] Está dentro ou não da dieta
+    
 [-] Deve ser possível editar uma refeição, podendo alterar todos os dados acima
 
 [-] Deve ser possível apagar uma refeição
