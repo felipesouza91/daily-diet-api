@@ -1,10 +1,15 @@
-import fastify, { FastifyInstance } from "fastify";
+import {
+  FastifyInstance,
+  FastifyRegisterOptions,
+  RegisterOptions,
+} from 'fastify'
 
-const userRouter = (fastify: FastifyInstance, opts, done) {
-
-  fastify.post('/use', (request, reponse) => {
-    
+export async function userRouter(
+  fastify: FastifyInstance,
+  options: FastifyRegisterOptions<RegisterOptions>,
+) {
+  fastify.post('/users', (request, reponse) => {
+    console.log('')
+    return { menssage: 'Teste' }
   })
-
-
 }
