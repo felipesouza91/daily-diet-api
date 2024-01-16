@@ -1,7 +1,8 @@
+import { Encrypt } from '../../data/protocols/cryptography/Encrypter'
 import {
   FindUserByEmailRepository,
   User,
-} from '../../data/repository/FindUserByEmailRepository'
+} from '../../data/protocols/repository/FindUserByEmailRepository'
 import { AppError } from '../../main/shared/AppError'
 
 interface CreateUseData {
@@ -12,9 +13,13 @@ interface CreateUseData {
 
 export class CreateUserUseCase {
   private findUserByEmailRepository: FindUserByEmailRepository
-
-  constructor(findUserByEmailRepository: FindUserByEmailRepository) {
+  private encrypt: Encrypt
+  constructor(
+    findUserByEmailRepository: FindUserByEmailRepository,
+    Encrypt: Encrypt,
+  ) {
     this.findUserByEmailRepository = findUserByEmailRepository
+    this.encrypt = Encrypt
   }
 
   async execute({ email, password, name }: CreateUseData): Promise<User> {
@@ -22,6 +27,7 @@ export class CreateUserUseCase {
     if (userExits) {
       throw new AppError('Email already used')
     }
+    await this.encrypt.encrypt(password)
     return {} as User
   }
 }
