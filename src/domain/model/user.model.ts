@@ -5,7 +5,3 @@ export interface User {
   password: string
   email: string
 }
-
-export interface FindUserByEmailRepository {
-  findByEmail(email: string): Promise<User | undefined>
-}

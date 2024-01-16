@@ -1,13 +1,11 @@
 import { describe, expect, test, vi } from 'vitest'
-import { Encrypt } from '../../data/protocols/cryptography/Encrypter'
-import {
-  FindUserByEmailRepository,
-  User,
-} from '../../data/protocols/repository/FindUserByEmailRepository'
+import { User } from '../../../model/user.model'
+import { Encrypt } from '../../../protocols/cryptography/Encrypter'
+import { FindUserByEmailRepository } from '../../../protocols/repository/FindUserByEmailRepository'
 import {
   SaveUserInput,
   SaveUserRepository,
-} from '../../data/protocols/repository/SaveUserRepository'
+} from '../../../protocols/repository/SaveUserRepository'
 import { CreateUserUseCase } from './createUseCase'
 
 const data = {

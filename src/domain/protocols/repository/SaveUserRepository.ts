@@ -1,4 +1,5 @@
-import { User } from './FindUserByEmailRepository'
+import { User } from '../../model/user.model'
+
 export interface SaveUserInput {
   name: string
   email: string

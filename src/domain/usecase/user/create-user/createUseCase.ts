@@ -1,10 +1,8 @@
-import { Encrypt } from '../../data/protocols/cryptography/Encrypter'
-import {
-  FindUserByEmailRepository,
-  User,
-} from '../../data/protocols/repository/FindUserByEmailRepository'
-import { SaveUserRepository } from '../../data/protocols/repository/SaveUserRepository'
-import { AppError } from '../../main/shared/AppError'
+import { AppError } from '../../../../main/shared/AppError'
+import { User } from '../../../model/user.model'
+import { Encrypt } from '../../../protocols/cryptography/Encrypter'
+import { FindUserByEmailRepository } from '../../../protocols/repository/FindUserByEmailRepository'
+import { SaveUserRepository } from '../../../protocols/repository/SaveUserRepository'
 
 interface CreateUseData {
   email: string
