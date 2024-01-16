@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests --silent ",
     "test:watch": "vitest --watch",
+    "test:staged": "npm test --findRelatedTests",
+    "test:ci": "npm test -- --coverage ",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -19,6 +21,7 @@
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",
     "@types/node": "^20.8.7",
+    "@vitest/coverage-v8": "^1.2.0",
     "eslint": "^8.52.0",
     "git-commit-msg-linter": "^5.0.6",
     "husky": "^8.0.0",
