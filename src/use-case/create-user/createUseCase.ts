@@ -1,3 +1,4 @@
+import { FindUserByEmailRepository } from '../../data/repository/FindUserByEmailRepository'
 
 interface CreateUseData {
   email: string
@@ -6,12 +7,14 @@ interface CreateUseData {
 }
 
 export class CreateUserUseCase {
+  private findUserByEmailRepository: FindUserByEmailRepository
+
+  constructor(findUserByEmailRepository: FindUserByEmailRepository) {
+    this.findUserByEmailRepository = findUserByEmailRepository
+  }
+
   async execute({ email, password, name }: CreateUseData) {
+    this.findUserByEmailRepository.findByEmail(email)
     return 0
   }
 }
-
-
-// Anual - 249- //
-
-// michelle - 229 //
