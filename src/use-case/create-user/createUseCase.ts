@@ -38,12 +38,12 @@ export class CreateUserUseCase {
       throw new AppError('Email already used')
     }
     const hashPassword = await this.encrypt.encrypt(password)
-    await this.saveUserRepository.save({
+    const user = await this.saveUserRepository.save({
       email,
       name,
       password: hashPassword,
       photoUrl,
     })
-    return {} as User
+    return user
   }
 }
