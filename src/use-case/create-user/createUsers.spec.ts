@@ -13,7 +13,7 @@ import { CreateUserUseCase } from './createUseCase'
 const data = {
   email: 'sample@email.com',
   name: 'John doe',
-  password: '123456',
+  password: 'valid_password',
 }
 
 const resultData = {
@@ -26,7 +26,7 @@ const resultData = {
 
 class Cypher implements Encrypt {
   encrypt(value: string): Promise<string> {
-    return Promise.resolve(value.toString())
+    return Promise.resolve(value.toUpperCase())
   }
 }
 
@@ -85,5 +85,15 @@ describe('Create User use case Test', () => {
     vi.spyOn(repository, 'save')
     await sut.execute(data)
     expect(repository.save).toBeCalledTimes(1)
+  })
+
+  test('should saveUser repository is call with correct value', async () => {
+    const { repository, sut } = makeSut()
+    vi.spyOn(repository, 'save')
+    await sut.execute(data)
+    expect(repository.save).toBeCalledWith({
+      ...data,
+      password: data.password.toUpperCase(),
+    })
   })
 })
