@@ -4,6 +4,10 @@ import {
   FindUserByEmailRepository,
   User,
 } from '../../data/protocols/repository/FindUserByEmailRepository'
+import {
+  SaveUserInput,
+  SaveUserRepository,
+} from '../../data/protocols/repository/SaveUserRepository'
 import { CreateUserUseCase } from './createUseCase'
 
 const data = {
@@ -26,7 +30,11 @@ class Cypher implements Encrypt {
   }
 }
 
-class UserRepository implements FindUserByEmailRepository {
+class UserRepository implements FindUserByEmailRepository, SaveUserRepository {
+  save(data: SaveUserInput): Promise<User> {
+    return Promise.resolve({ id: 'valid-uuid', ...data })
+  }
+
   findByEmail(email: string): Promise<User | undefined> {
     return Promise.resolve(undefined)
   }
@@ -35,7 +43,7 @@ class UserRepository implements FindUserByEmailRepository {
 const makeSut = () => {
   const cypher = new Cypher()
   const repository = new UserRepository()
-  const sut = new CreateUserUseCase(repository, cypher)
+  const sut = new CreateUserUseCase(repository, cypher, repository)
   return {
     repository,
     sut,
@@ -70,5 +78,12 @@ describe('Create User use case Test', () => {
     vi.spyOn(cypher, 'encrypt')
     await sut.execute(data)
     expect(cypher.encrypt).toBeCalledWith(data.password)
+  })
+
+  test('should saveUser repository has been called', async () => {
+    const { repository, sut } = makeSut()
+    vi.spyOn(repository, 'save')
+    await sut.execute(data)
+    expect(repository.save).toBeCalledTimes(1)
   })
 })
