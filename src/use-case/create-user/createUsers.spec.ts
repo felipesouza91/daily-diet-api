@@ -64,4 +64,11 @@ describe('Create User use case Test', () => {
     await sut.execute(data)
     expect(cypher.encrypt).toBeCalledTimes(1)
   })
+
+  test('should bcrypt already called with correct value', async () => {
+    const { repository, cypher, sut } = makeSut()
+    vi.spyOn(cypher, 'encrypt')
+    await sut.execute(data)
+    expect(cypher.encrypt).toBeCalledWith(data.password)
+  })
 })
