@@ -67,14 +67,14 @@ describe('Create User use case Test', () => {
   })
 
   test('should bcrypt already called to cypher password', async () => {
-    const { repository, cypher, sut } = makeSut()
+    const { cypher, sut } = makeSut()
     vi.spyOn(cypher, 'encrypt')
     await sut.execute(data)
     expect(cypher.encrypt).toBeCalledTimes(1)
   })
 
   test('should bcrypt already called with correct value', async () => {
-    const { repository, cypher, sut } = makeSut()
+    const { cypher, sut } = makeSut()
     vi.spyOn(cypher, 'encrypt')
     await sut.execute(data)
     expect(cypher.encrypt).toBeCalledWith(data.password)
@@ -102,5 +102,25 @@ describe('Create User use case Test', () => {
     const user = await sut.execute(data)
     expect(user).not.toBeNull()
     expect(user.id).toBeTruthy()
+  })
+
+  test('should throws when findUserRespository throws', async () => {
+    const { repository, sut } = makeSut()
+    vi.spyOn(repository, 'findByEmail').mockRejectedValueOnce(new Error())
+    const response = sut.execute(data)
+    await expect(response).rejects.toThrow()
+  })
+  test('should throws when Encrypt throws', async () => {
+    const { cypher, sut } = makeSut()
+    vi.spyOn(cypher, 'encrypt').mockRejectedValueOnce(new Error())
+    const response = sut.execute(data)
+    await expect(response).rejects.toThrow()
+  })
+
+  test('should throws when saveUser throws', async () => {
+    const { repository, sut } = makeSut()
+    vi.spyOn(repository, 'save').mockRejectedValueOnce(new Error())
+    const response = sut.execute(data)
+    await expect(response).rejects.toThrow()
   })
 })
