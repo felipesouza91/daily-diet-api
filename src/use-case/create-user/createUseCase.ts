@@ -1,4 +1,8 @@
-import { FindUserByEmailRepository } from '../../data/repository/FindUserByEmailRepository'
+import {
+  FindUserByEmailRepository,
+  User,
+} from '../../data/repository/FindUserByEmailRepository'
+import { AppError } from '../../main/shared/AppError'
 
 interface CreateUseData {
   email: string
@@ -13,8 +17,11 @@ export class CreateUserUseCase {
     this.findUserByEmailRepository = findUserByEmailRepository
   }
 
-  async execute({ email, password, name }: CreateUseData) {
-    this.findUserByEmailRepository.findByEmail(email)
-    return 0
+  async execute({ email, password, name }: CreateUseData): Promise<User> {
+    const userExits = await this.findUserByEmailRepository.findByEmail(email)
+    if (userExits) {
+      throw new AppError('Email already used')
+    }
+    return {} as User
   }
 }
