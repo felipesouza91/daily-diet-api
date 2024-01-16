@@ -96,4 +96,11 @@ describe('Create User use case Test', () => {
       password: data.password.toUpperCase(),
     })
   })
+
+  test('should return a user with id field', async () => {
+    const { sut } = makeSut()
+    const user = await sut.execute(data)
+    expect(user).not.toBeNull()
+    expect(user.id).toBeTruthy()
+  })
 })
