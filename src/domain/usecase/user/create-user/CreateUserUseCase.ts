@@ -7,7 +7,6 @@ import {
   CreateUseData,
   CreateUserUseCase,
 } from '@/domain/protocols/usecases/user/CreateUserUseCase'
-// import { AppError } from '../../../protocols/erros/AppError'
 
 export class CreateUserUseCaseImpl implements CreateUserUseCase {
   private findUserByEmailRepository: FindUserByEmailRepository
