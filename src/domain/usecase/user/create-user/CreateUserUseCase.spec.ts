@@ -6,7 +6,7 @@ import {
   SaveUserRepository,
 } from '@/domain/protocols/repository/SaveUserRepository'
 import { describe, expect, test, vi } from 'vitest'
-import { CreateUserUseCaseImpl } from './createUseCase'
+import { CreateUserUseCaseImpl } from './CreateUserUseCase'
 
 const data = {
   email: 'sample@email.com',
