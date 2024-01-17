@@ -1,3 +1,5 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/felipesouza91/daily-diet-api/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/felipesouza91/daily-diet-api/tree/main)
+
 # Daily Diet API
 
 Desafio proposto como para fixição do aprendizado do desenvolvimento de uma API REST em nodeJs. API utilizada parar gerenciar o consumo de alimentos.
