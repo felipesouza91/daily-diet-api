@@ -29,24 +29,12 @@ jobs:
       - run:
           name: Run tests
           command: npm run test:ci
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
-    docker:
-      - image: cimg/base:stable
-    steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+      - codecov/upload
 workflows:
   build-and-test:
     jobs:
       - test-node
-  upload-to-codecov:
-    jobs:
-      - test-node:
-          post-steps:
-            - codecov/upload
+
     # - deploy:
     #     requires:
     #       - test-node
