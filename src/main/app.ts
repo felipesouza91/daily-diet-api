@@ -1,5 +1,5 @@
+import { userRouter } from '@/routes/users'
 import Fastify from 'fastify'
-import { userRouter } from '../routes/users'
 
 const app = Fastify({
   logger: true,

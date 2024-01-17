@@ -1,17 +1,15 @@
-import { AppError } from '../../../../main/shared/AppError'
-import { User } from '../../../model/user.model'
-import { Encrypt } from '../../../protocols/cryptography/Encrypter'
-import { FindUserByEmailRepository } from '../../../protocols/repository/FindUserByEmailRepository'
-import { SaveUserRepository } from '../../../protocols/repository/SaveUserRepository'
+import { User } from '@/domain/model/user.model'
+import { Encrypt } from '@/domain/protocols/cryptography/Encrypter'
+import { AppError } from '@/domain/protocols/erros/AppError'
+import { FindUserByEmailRepository } from '@/domain/protocols/repository/FindUserByEmailRepository'
+import { SaveUserRepository } from '@/domain/protocols/repository/SaveUserRepository'
+import {
+  CreateUseData,
+  CreateUserUseCase,
+} from '@/domain/protocols/usecases/user/CreateUserUseCase'
+// import { AppError } from '../../../protocols/erros/AppError'
 
-interface CreateUseData {
-  email: string
-  password: string
-  name: string
-  photoUrl?: string
-}
-
-export class CreateUserUseCase {
+export class CreateUserUseCaseImpl implements CreateUserUseCase {
   private findUserByEmailRepository: FindUserByEmailRepository
   private encrypt: Encrypt
   private saveUserRepository: SaveUserRepository

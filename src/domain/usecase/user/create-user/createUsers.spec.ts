@@ -1,12 +1,12 @@
-import { describe, expect, test, vi } from 'vitest'
-import { User } from '../../../model/user.model'
-import { Encrypt } from '../../../protocols/cryptography/Encrypter'
-import { FindUserByEmailRepository } from '../../../protocols/repository/FindUserByEmailRepository'
+import { User } from '@/domain/model/user.model'
+import { Encrypt } from '@/domain/protocols/cryptography/Encrypter'
+import { FindUserByEmailRepository } from '@/domain/protocols/repository/FindUserByEmailRepository'
 import {
   SaveUserInput,
   SaveUserRepository,
-} from '../../../protocols/repository/SaveUserRepository'
-import { CreateUserUseCase } from './createUseCase'
+} from '@/domain/protocols/repository/SaveUserRepository'
+import { describe, expect, test, vi } from 'vitest'
+import { CreateUserUseCaseImpl } from './createUseCase'
 
 const data = {
   email: 'sample@email.com',
@@ -41,7 +41,7 @@ class UserRepository implements FindUserByEmailRepository, SaveUserRepository {
 const makeSut = () => {
   const cypher = new Cypher()
   const repository = new UserRepository()
-  const sut = new CreateUserUseCase(repository, cypher, repository)
+  const sut = new CreateUserUseCaseImpl(repository, cypher, repository)
   return {
     repository,
     sut,
