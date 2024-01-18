@@ -7,5 +7,5 @@ export interface CreateUseData {
 }
 
 export interface CreateUserUseCase {
-  execute(data: CreateUseData): Promise<User>
+  execute(data: CreateUseData): Promise<User | null>
 }

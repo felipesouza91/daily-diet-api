@@ -60,8 +60,8 @@ describe('Create User use case Test', () => {
   test('should throw if emails already used', async () => {
     const { repository, sut } = makeSut()
     vi.spyOn(repository, 'findByEmail').mockResolvedValue(resultData)
-    const response = sut.execute(data)
-    expect(response).rejects.toThrow('User already exists')
+    const response = await sut.execute(data)
+    expect(response).toBeNull()
   })
 
   test('should bcrypt already called to cypher password', async () => {
@@ -99,7 +99,7 @@ describe('Create User use case Test', () => {
     const { sut } = makeSut()
     const user = await sut.execute(data)
     expect(user).not.toBeNull()
-    expect(user.id).toBeTruthy()
+    expect(user!.id).toBeTruthy()
   })
 
   test('should throws when findUserRespository throws', async () => {
