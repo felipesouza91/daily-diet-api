@@ -8,7 +8,7 @@ import { describe, expect, test, vi } from 'vitest'
 import { SignUpController } from './SignUpController'
 
 class CreateUserUseCaseStub implements CreateUserUseCase {
-  execute(data: CreateUseData): Promise<User> {
+  execute(data: CreateUseData): Promise<User | null> {
     return Promise.resolve({
       id: 'uuid',
       email: 'valid@email.com',
@@ -47,5 +47,14 @@ describe('SignUpController', async () => {
     vi.spyOn(useCase, 'execute')
     await sut.handler(fakeInputRequest)
     expect(useCase.execute).toHaveBeenCalledWith(fakeInputRequest)
+  })
+  test('should return bad request if email exists', async () => {
+    const { sut, useCase } = makeSut()
+    vi.spyOn(useCase, 'execute').mockResolvedValueOnce(null)
+    const response = await sut.handler(fakeInputRequest)
+    expect(response).toEqual({
+      statusCode: 400,
+      errorMessage: 'Email already in use',
+    })
   })
 })
