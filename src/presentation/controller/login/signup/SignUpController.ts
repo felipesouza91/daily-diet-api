@@ -20,6 +20,12 @@ export class SignUpController {
     password,
     photoUrl,
   }: InputSignInControllerData) {
-    this.useCase.execute({ email, name, password, photoUrl })
+    const user = await this.useCase.execute({ email, name, password, photoUrl })
+    if (!user) {
+      return {
+        statusCode: 400,
+        errorMessage: 'Email already in use',
+      }
+    }
   }
 }
