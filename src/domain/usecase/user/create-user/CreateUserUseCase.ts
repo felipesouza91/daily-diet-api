@@ -1,6 +1,6 @@
 import { User } from '@/domain/model/user.model'
 import { Encrypt } from '@/domain/protocols/cryptography/Encrypter'
-import { AppError } from '@/domain/protocols/erros/AppError'
+import { UserExits } from '@/domain/protocols/erros/UserExists'
 import { FindUserByEmailRepository } from '@/domain/protocols/repository/FindUserByEmailRepository'
 import { SaveUserRepository } from '@/domain/protocols/repository/SaveUserRepository'
 import {
@@ -30,7 +30,7 @@ export class CreateUserUseCaseImpl implements CreateUserUseCase {
   }: CreateUseData): Promise<User> {
     const userExits = await this.findUserByEmailRepository.findByEmail(email)
     if (userExits) {
-      throw new AppError('Email already used')
+      throw new UserExits()
     }
     const hashPassword = await this.encrypt.encrypt(password)
     const user = await this.saveUserRepository.save({
