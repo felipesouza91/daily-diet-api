@@ -61,7 +61,7 @@ describe('Create User use case Test', () => {
     const { repository, sut } = makeSut()
     vi.spyOn(repository, 'findByEmail').mockResolvedValue(resultData)
     const response = sut.execute(data)
-    await expect(response).rejects.toThrow('Email already used')
+    expect(response).rejects.toThrow('User already exists')
   })
 
   test('should bcrypt already called to cypher password', async () => {
