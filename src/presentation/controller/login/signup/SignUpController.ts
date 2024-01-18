@@ -1,7 +1,11 @@
-import {
-  CreateUseData,
-  CreateUserUseCase,
-} from '@/domain/protocols/usecases/user/CreateUserUseCase'
+import { CreateUserUseCase } from '@/domain/protocols/usecases/user/CreateUserUseCase'
+
+interface InputSignInControllerData {
+  name: string
+  email: string
+  password: string
+  photoUrl?: string
+}
 
 export class SignUpController {
   private useCase: CreateUserUseCase
@@ -10,7 +14,12 @@ export class SignUpController {
     this.useCase = useCase
   }
 
-  async run() {
-    this.useCase.execute({} as CreateUseData)
+  async handler({
+    email,
+    name,
+    password,
+    photoUrl,
+  }: InputSignInControllerData) {
+    this.useCase.execute({ email, name, password, photoUrl })
   }
 }
